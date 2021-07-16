@@ -1,4 +1,5 @@
-import { Component, Vue, Watch } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
+import LineChart from './LineChart'
 
 interface Coords {
   x: number, 
@@ -13,6 +14,7 @@ interface ChartData {
 
 @Component({
   components:{
+    LineChart
   }
 })
 
@@ -87,7 +89,7 @@ export default class SimpleLayout extends Vue {
           y: 50,
         },
         {
-          x: 140,
+          x: 100,
           y: 240,
         },
         {
@@ -103,32 +105,32 @@ export default class SimpleLayout extends Vue {
           y: 850,
         },
         {
-          x: 200,
-          y: 400,
+          x: 450,
+          y: 800,
         },
         {
-          x: 380,
+          x: 500,
           y: 900,
         },
         {
-          x: 330,
+          x: 550,
           y: 850,
         },
         {
-          x: 450,
+          x: 600,
           y: 800,
         },
 
         {
-          x: 550,
+          x: 750,
           y: 700,
         },
         {
-          x: 500,
+          x: 800,
           y: 650,
         },
         {
-          x: 800,
+          x: 850,
           y: 600,
         },
         {
@@ -138,46 +140,4 @@ export default class SimpleLayout extends Vue {
       ]
     }  
   ]
-  svgWidth: number = 1000
-  svgHeight: number = 500
-  axisCount: number =  4
-  paddingX: number  = 50
-  paddingY: number  = 50
-  get maxX() {
-    const onlyX: number[] = []
-    this.data.forEach((item) => {
-      item.coords.forEach(coord => onlyX.push(coord.x))
-    })
-    return Math.max(...onlyX)
-  }
-  get maxY() {
-    const onlyY: number[] = []
-    this.data.forEach((item) => {
-      item.coords.forEach(coord => onlyY.push(coord.y))
-    })
-    return Math.max(...onlyY)
-  }
-  sortX(coords: Coords[]) {
-    return coords.sort((coordA, coordB) => {
-      return coordB.x - coordA.x
-    })
-  }
-  getSvgX(x: number) {
-    return (x / this.maxX) * this.svgWidth
-  }
-  getSvgY(y: number) {
-    return this.svgHeight - (y / this.maxY) * this.svgHeight
-  }
-  get axis() {
-    const axis = []
-    for (let i = 0; i < this.axisCount; i++) {
-      axis.push({
-        x1: 0,
-        y1: (this.svgHeight + this.paddingY) / (this.axisCount - 1) * i,
-        x2: this.svgWidth + this.paddingX,
-        y2: (this.svgHeight + this.paddingY) / (this.axisCount - 1) * i
-      })
-    }
-    return axis
-  }
 }
