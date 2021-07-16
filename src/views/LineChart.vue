@@ -4,7 +4,7 @@
     <g>      
       <g>
         <line 
-          v-for='(item, index) in axis'
+          v-for='(item, index) in dividers'
           :key='index + 1'
           stroke='#edecf1'
           stroke-width='1'
